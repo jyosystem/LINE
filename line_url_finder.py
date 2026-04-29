@@ -122,7 +122,13 @@ def extract_line_urls(text: str) -> Set[str]:
 def normalize_url(url: str) -> str:
     """URL末尾のスラッシュ等を整形。"""
     return url.strip().rstrip("/")
+def is_valid_url(url: str) -> bool:
 
+    """URLの基本的な妥当性をチェックする。"""
+    if not url:
+        return False
+    parsed = urlparse(url)
+    return parsed.scheme in ("http", "https") and bool(parsed.netloc)
 
 # ------------------------------------------------------------------
 # Google Custom Search
